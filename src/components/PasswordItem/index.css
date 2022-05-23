@@ -1,0 +1,67 @@
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  color: #f8fafc;
+  border: 1px solid #9ba9eb;
+  padding: 10px;
+  border-radius: 5px;
+  height: 100px;
+  margin-right: 10px;
+}
+.details-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.delete-image {
+  width: 30px;
+}
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.input-details {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.user-logo {
+  padding-top: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 24px;
+}
+.stars-image {
+  width: 120px;
+}
+.amber {
+  background-color: #f59e0b;
+}
+
+.blue {
+  background-color: #0b69ff;
+}
+
+.orange {
+  background-color: #f97316;
+}
+
+.emerald {
+  background-color: #10b981;
+}
+
+.teal {
+  background-color: #14b8a6;
+}
+
+.red {
+  background-color: #b91c1c;
+}
+
+.light-blue {
+  background-color: #0ea5e9;
+}
