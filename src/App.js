@@ -20,7 +20,7 @@ class App extends Component {
     password: '',
     search: '',
     count: 0,
-    hide: false,
+    isChecked: false,
   }
 
   changeWebsite = event => {
@@ -43,7 +43,7 @@ class App extends Component {
 
   managePassword = event => {
     event.preventDefault()
-    const {username, password, website, passwordList} = this.state
+    const {username, password, website} = this.state
 
     const randomClassPicker = Math.ceil(Math.random() * colors.length - 1)
     if (username !== '' && password !== '' && website !== '') {
@@ -53,10 +53,9 @@ class App extends Component {
         username,
         password,
         classNames: colors[randomClassPicker],
-        passwordHidden: true,
       }
       this.setState(prevState => ({
-        passwordList: [...passwordList, newPasswordObject],
+        passwordList: [...prevState.passwordList, newPasswordObject],
         username: '',
         website: '',
         password: '',
@@ -93,28 +92,12 @@ class App extends Component {
     })
   }
 
-  onShowHidePassword = () => {
-    const {passwordList} = this.state
-    const filteredList = passwordList.map(eachItem => {
-      if (eachItem.passwordHidden === true) {
-        return {...eachItem, passwordHidden: false}
-      }
-      return {...eachItem, passwordHidden: true}
-    })
-    this.setState({
-      passwordList: filteredList,
-    })
-  }
-
-  onShowPassword = () => {
-    this.setState(prevState => ({
-      hide: !prevState.hide,
-    }))
-    this.onShowHidePassword()
+  onChecked = () => {
+    this.setState(prev => ({isChecked: !prev.isChecked}))
   }
 
   render() {
-    const {username, password, website, count} = this.state
+    const {username, password, website, count, isChecked} = this.state
 
     const updatedPasswordList = this.getFilteredPasswordList()
     let length = false
@@ -223,7 +206,8 @@ class App extends Component {
                 type="checkbox"
                 id="show-password"
                 className="input-checkbox"
-                onClick={this.onShowPassword}
+                onChange={this.onChecked}
+                checked={isChecked}
               />
               <label htmlFor="show-password">Show Passwords</label>
             </div>
@@ -234,7 +218,8 @@ class App extends Component {
                   alt="no passwords"
                   className="no-password"
                 />
-                <p className="your-password-heading">No Passwords</p>
+
+                <p>No Passwords</p>
               </div>
             ) : (
               <ul>
@@ -243,6 +228,7 @@ class App extends Component {
                     key={eachItem.id}
                     passwordDetails={eachItem}
                     deletePasswordItem={this.deletePasswordItem}
+                    isChecked={isChecked}
                   />
                 ))}
               </ul>
